@@ -11,11 +11,11 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 */
 
-class Solution {
+public class Solution1 {
     public static void main(String args[]) {
         int[] nums = new int[]{0, 2, 7, 4};
         int target = 9;
-        int[] index = new Solution().twoSum(nums, target);
+        int[] index = new Solution1().twoSum(nums, target);
         System.out.println(index[0] + "," + index[1]);
     }
     public int[] twoSum(int[] nums, int target) {
