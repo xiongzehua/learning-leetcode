@@ -11,7 +11,7 @@ Explanation: 342 + 465 = 807.
  */
 
 /*
-下面这种做法只是适用于输入链表变为整数后在int范围内的情况，正确做法在Solution2_1中
+下面这种做法只是适用于，输入链表化成的整数，在int范围内的情况，正确做法在Solution2_1中
  */
 public class Solution2 {
     public static void main(String[] args) {
@@ -69,7 +69,5 @@ public class Solution2 {
         ListNode next;
         ListNode (int x) { val = x; }
     }
-
-
 }
 
