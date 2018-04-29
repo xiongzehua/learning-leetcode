@@ -14,7 +14,7 @@ public class Solution21 {
         public ListNode next;
         public ListNode(int x) { val = x; }
     }
-    public ListNode MergeTwoLists(ListNode l1, ListNode l2) {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode head = null;
         ListNode current = null;
 
