@@ -6,7 +6,7 @@ Example:
 Input: 1->2->4, 1->3->4
 Output: 1->1->2->3->4->4
 
-此解法为标准新增节点范式写法。
+此解法为链表新增节点的标准范式写法。
  */
 public class Solution21 {
     public static class ListNode {
