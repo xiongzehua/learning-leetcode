@@ -35,7 +35,7 @@ You can also return high+1 as the result, since low == high+1
 
 class Solution2 {
     public int searchInsert(int[] nums, int target) {
-        int low = 0, high = nums.length-1;
+        int low = 0, high = nums.length - 1;
 
         // Invariant: the desired index is between [low, high+1]
         while (low <= high) {
