@@ -38,7 +38,7 @@ class Solution2 {
         int low = 0, high = nums.length-1;
 
         // Invariant: the desired index is between [low, high+1]
-        while(low <= high){
+        while (low <= high) {
             int mid = (low + high) / 2;
 
             if (nums[mid] < target)
