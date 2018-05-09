@@ -45,17 +45,18 @@ class Solution {
             if (!buf.equals(pre)) {
                 list.add(buf);
             } else {
+                StringBuffer newStr = new StringBuffer();
                 String oldStr = list.removeLast();
-                String newStr = oldStr + buf;
-                list.add(newStr);
+                newStr.append(oldStr).append(buf);
+                list.add(newStr.toString());
             }
             pre = buf;
         }
 
-        String next = "";
+        StringBuffer sb = new StringBuffer();
         for (String str : list) {
-            next = next + str.length() + str.substring(0,1);
+            sb.append(String.valueOf(str.length())).append(str.substring(0,1));
         }
-        return next;
+        return sb.toString();
     }
 }
