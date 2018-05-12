@@ -25,28 +25,45 @@ j A   H R
 P     I
 */
 
-import java.util.*;
+import java.util.TreeMap;
+import java.util.Comparator;
 class Solution {
+    public static void main(String args[]) {
+        new Solution().convert("12345678", 1);
+    }
     public String convert(String s, int numRows) {
         int length = s.length();
-        Coordinate.numRows = numRows - 1;
+        Coordinate.iMax = numRows - 1;
 
-        Map<Coordinate, String> map = new <Coordinate, String>HashMap();
+        TreeMap<Coordinate, String> map = new TreeMap<Coordinate, String>(new Comparator<Coordinate>() {
+            @Override
+            public int compare(Coordinate o1, Coordinate o2) {
+                if (o1.i < o2.i)
+                    return -1;
+                else if (o1.i > o2.i)
+                    return 1;
+                else 
+                    return o1.j < o2.j ? -1 : 1;
+            }
+        });
         Coordinate coo = null;
         for (int i = 0; i < length; i++) {
             if (coo == null) {
                 coo = new Coordinate(0, 0);
+                System.out.println("i:" + coo.i + " j:" + coo.j + " value:" + s.substring(i, i + 1));
                 map.put(coo, s.substring(i, i + 1));
             } else {
                 coo = coo.next();
+                System.out.println("i:" + coo.i + " j:" + coo.j + " value:" + s.substring(i, i + 1));
                 map.put(coo, s.substring(i, i + 1));
             }
         }
 
         StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < length; i++) {
-            
+        for (int i2 = 0; i2 < length; i2++) {
+            sb.append(map.pollFirstEntry().getValue());
         }
+        return sb.toString();
     }
 }
 
@@ -63,18 +80,23 @@ class Coordinate {
     public Coordinate next() {
         if (i == iMax) {
             vertical = false;
-            return new Coordinate(i-1, j+1);
+            if (iMax == 0)
+                return new Coordinate(0, j + 1);
+            else
+                return new Coordinate(i -1, j + 1);
         }
-  
         if (i == 0) {
             vertical = true;
-            return new Coordinate(i, j+1);
+            if (iMax == 0)
+                return new Coordinate(0, j + 1);
+            else
+                return new Coordinate(i + 1, j);
         }
 
         if (vertical)     
-            return new Coordinate(i, j+1);
+            return new Coordinate(i + 1, j);
         else 
-            return new Coordinate(i-1, j+1);    
+            return new Coordinate(i - 1, j + 1);    
         
     }
 
