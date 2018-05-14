@@ -18,20 +18,24 @@ Explanation: The square root of 8 is 2.82842..., and since
 */
 
 class Solution {
+    public static void main(String[] args) {
+        System.out.println(new Solution().mySqrt(2147395599));
+    }
     public int mySqrt(int x) {
-        int start = 1;
-        int end = x;
-        int mid = (start + end) / 2;
+        long start = 1;
+        long end = x;
+        long mid = (start + end) / 2;
         while (start <= end) {
-            // if ((mid * mid) == x)
-            //     return mid;
-            if ((mid * mid) < x) 
+            System.out.println("start: " + start + " mid:" + mid + " end" + end);
+            if ((mid * mid) == x)
+                return (int)mid;
+            if ((long)(mid * mid) < (long)x) 
                 start = mid + 1;     
             else
                 end = mid - 1;
             
             mid = (start + end) / 2;
         }
-        return start - 1;
+        return (int)start - 1;
     }
 }
