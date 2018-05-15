@@ -23,7 +23,29 @@ Explanation: There are three ways to climb to the top.
 */
 
 class Solution {
+    static HashMap<Integer, Integer> cache = new HashMap<Integer, Integer>();
     public int climbStairs(int n) {
-        
+        if (n == 1)
+            return 1;
+        if (n == 2)
+            return 2;
+
+        int a = 0;
+        if (cache.containsKey(n - 1)) {
+            a = cache.get(n - 1);
+        } else {
+            a = climbStairs(n - 1);
+            cache.put(n-1, a);
+        }
+
+        int b = 0;
+        if (cache.containsKey(n - 2)) {
+            b = cache.get(n - 2);
+        } else {
+            b = climbStairs(n - 2);
+            cache.put(n-2, b);
+        }
+
+        return a + b;
     }
 }
