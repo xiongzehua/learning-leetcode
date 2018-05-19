@@ -15,6 +15,27 @@ A solution set is:
   [-1, -1, 2]
 ]
 */
-class Solution {
-  
+public class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(nums[i])) {
+                int newCnt = map.get(nums[i]) + 1;
+                map.put(nums[i], newCnt);
+            } else
+                map.put(nums[i], 1);
+        }
+
+
+        for (Integer a :map.keySet()) {
+            for (Integer b :map.keySet()) {
+                int c = 0 - a - b;
+                if (map.containsKey(c)) {
+
+
+                } else
+                    continue;
+            }
+        }
+    }
 }
