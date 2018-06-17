@@ -13,9 +13,9 @@ Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 import java.util.*;
 
 class Solution {
-    HashMap<String, String> map;
+    HashMap<String, List<String>> map;
     {
-        map = new HashMap<String, ArrayList<String>>();
+        map = new HashMap<String, List<String>>();
         map.put("2", Arrays.asList("a", "b", "c"));
         map.put("3", Arrays.asList("d", "e", "f"));
         map.put("4", Arrays.asList("g", "h", "i"));
@@ -26,18 +26,22 @@ class Solution {
         map.put("9", Arrays.asList("w", "x", "y", "z"));
     }
     public List<String> letterCombinations(String digits) {
-        ArrayList<String> list = map.get(digits.substring(0,1));
+        if (digits.length() == 0) 
+            return new ArrayList();
+
+        List<String> list = map.get(digits.substring(0,1));
         for (int i = 1; i < digits.length(); i++) {
             list = cartesianProduct(list, map.get(digits.substring(i,i + 1)));
         }
         return list;
     }
-    public ArrayList<String> cartesianProduct(ArrayList<String> list1, ArrayList<String> list2) {
-        ArrayList<String> list = new ArrayList<String>();
+    public List<String> cartesianProduct(List<String> list1, List<String> list2) {
+        List<String> list = new ArrayList<String>();
         for (int i = 0; i < list1.size(); i++) {
             for (int j = 0; j < list2.size(); j++) {
                 list.add(list1.get(i) + list2.get(j));
             }
         }
+        return list;
     }
 }
