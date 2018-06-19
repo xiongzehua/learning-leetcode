@@ -19,6 +19,18 @@ Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
 
 class Solution {
     public boolean isPalindrome(int x) {
-        
+        String str = String.valueOf(x);
+        int start = 0;
+        int end = str.length() - 1;
+
+        while(start < end) {
+            if (str.substring(start, start + 1).equals(str.substring(end, end + 1))) {
+                start++;
+                end--;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 }
