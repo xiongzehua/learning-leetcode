@@ -1,63 +1,63 @@
-/*
-Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+package com.xiongzehua.learning.java;
 
-For example, given n = 3, a solution set is:
+/**
+ * Created by xiongzehua on 2018/6/21.
+ */
+import org.junit.Test;
 
-[
-  "((()))",
-  "(()())",
-  "(())()",
-  "()(())",
-  "()()()"
-]
-*/
-
-/*
-用一颗二叉树来储存，1表示左括号，-1表示右括号。
-规则：从根开始向下遍历，每遍历一个便求一次和，若这个分支和小于0则这个分支错误。
-根是1，代表的是 "("
-*/
-import java.util.LinkedList;
-import java.util.List;
-class Solution {
+        import java.util.LinkedList;
+        import java.util.List;
+public class Solution {
+    @Test
+    public void test() {
+        List list = generateParenthesis(8);
+        System.out.println(list);
+    }
     public List<String> generateParenthesis(int n) {
         Single.lev = n * 2;
-        Node root = new Node(1, null);
-        root.left = buildTree(new Node(1, root), 1, -1);
-        root.right = buildTree(new Node(-1, root), 1, -1);
-        
+        Node root = new Node(0, 0, 0, null);
+        buildTree(root);
+
         LinkedList<String> list = new LinkedList<String>();
 
         for (Node node : Single.list) {
-            String s = "";
-            while(node == null) {
-                s = s + node.getParenthesis();
+            StringBuilder sb = new StringBuilder();
+            while(node != root) {
+                sb.append(node.getParenthesis());
+                node = node.prev;
             }
-            list.add(s);
+            list.add(sb.reverse().toString());
         }
         return list;
     }
     /**
      * 递归生成子二叉树
      *
-     * @param node 这颗子二叉树的根,传入时根节点只有value，没有left和right
-     * @param lev node的层级，初始时root为1，node层级 <= 2*n
-     * @param target 这颗子二叉树每一个分支目标和
+     * @param node 传入一个节点，构建这个节点的左右子树
      */
-    public Node buildTree(Node node, int lev, int target) {
-        if (target > 0)
-            return null;
-        if (lev == Single.lev) {
-            if (target == node.value)
+    public void buildTree(Node node) {
+        if (node.target > 0)
+            return;
+
+        if (node.lev >= Single.lev) {
+            if (node.target == node.value) {
                 Single.list.add(node);
-            return node;//无需继续递归了
-        }  
-        
-        target = target - node.value;
-        lev++;
-        node.left = buildTree(new Node(1, node), lev, target);
-        node.right = buildTree(new Node(-1, node), lev, target);
-        return node;
+                System.out.println(node);
+            }
+            return;//无需继续递归了
+        }
+
+        int newTarget = node.target - node.value;
+        int newLev = node.lev + 1;
+
+
+        node.left = new Node(1, newLev, newTarget, node);
+        buildTree(node.left);
+
+
+        node.right = new Node(-1, newLev, newTarget, node);
+        buildTree(node.right);
+
     }
 }
 class Single {
@@ -66,13 +66,28 @@ class Single {
 }
 class Node {
     int value;
+    int lev;
+    int target;
     Node prev;
     Node left;
     Node right;
-    Node(int value, Node prev) {
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "value=" + value +
+                ", lev=" + lev +
+                ", target=" + target +
+                '}';
+    }
+
+    public Node(int value, int lev, int target, Node prev) {
         this.value = value;
+        this.lev = lev;
+        this.target = target;
         this.prev = prev;
     }
+
     public String getParenthesis() {
         if (value == 1)
             return "(";
